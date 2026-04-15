@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RecycleLink - Professional Technical Report</title>
+<style>
+:root{--primary:#2E7D32;--dark:#1B5E20;--light:#E8F5E9;--orange:#FF9800;--blue:#1976D2;--red:#D32F2F;--text:#212121;--muted:#757575;--bg:#F5F5F5;--white:#FFFFFF;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Tahoma',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;direction:rtl}
+.container{max-width:960px;margin:0 auto;padding:20px}
+header{background:linear-gradient(135deg,var(--dark),var(--primary));color:white;padding:48px 20px;text-align:center;border-radius:0 0 24px 24px}
+header h1{font-size:2.2em;margin-bottom:8px}
+header .subtitle{opacity:.85;font-size:1.1em}
+header .meta{margin-top:16px;opacity:.7;font-size:.9em}
+.section{background:var(--white);border-radius:var(--radius);padding:28px;margin:20px 0;box-shadow:var(--shadow)}
+.section h2{color:var(--primary);font-size:1.5em;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--light)}
+.section h3{color:var(--dark);font-size:1.15em;margin:16px 0 8px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9em}
+table th{background:var(--primary);color:white;padding:10px 14px;text-align:right}
+table td{padding:10px 14px;border-bottom:1px solid #eee}
+table tr:nth-child(even){background:#fafafa}
+table tr:hover{background:var(--light)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.8em;font-weight:600}
+.badge-green{background:#E8F5E9;color:var(--primary)}
+.badge-orange{background:#FFF3E0;color:var(--orange)}
+.badge-blue{background:#E3F2FD;color:var(--blue)}
+.badge-red{background:#FFEBEE;color:var(--red)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0}
+.stat-card{background:var(--light);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-card .value{font-size:2em;font-weight:700;color:var(--primary)}
+.stat-card .label{color:var(--muted);font-size:.9em;margin-top:4px}
+.check{color:var(--primary)}
+.fail{color:var(--red)}
+ol,ul{padding-right:24px;margin:8px 0}
+li{margin:4px 0}
+code{background:#f0f0f0;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:.85em;direction:ltr;display:inline-block}
+pre{background:#1a1a2e;color:#e0e0e0;padding:16px;border-radius:var(--radius);overflow-x:auto;margin:12px 0;direction:ltr;font-size:.85em}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr}.container{padding:12px}header{padding:32px 16px}header h1{font-size:1.6em}}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:8px 12px;margin:4px 0;border-radius:8px;background:#fafafa}
+.checklist li::before{content:"✅";margin-left:8px}
+.warning{background:#FFF3E0;border-right:4px solid var(--orange);padding:12px 16px;border-radius:var(--radius);margin:12px 0}
+.info{background:#E3F2FD;border-right:4px solid var(--blue);padding:12px 16px;border-radius:var(--radius);margin:12px 0}
+footer{text-align:center;padding:32px;color:var(--muted);font-size:.85em}
+.signature{margin-top:40px;padding:24px;border:2px solid var(--primary);border-radius:var(--radius);text-align:center}
+.signature .name{font-size:1.3em;font-weight:700;color:var(--primary)}
+</style>
+</head>
+<body>
+
+<header>
+<h1>RecycleLink</h1>
+<div class="subtitle">بازار بازیافت - گزارش فنی تخصصی</div>
+<div class="meta">نسخه ۱.۰.۰ | تاریخ: ۱۴۰۵/۰۱/۱۸ | تکنولوژی: Flutter + Dart | پلتفرم: Android + Web</div>
+</header>
+
+<div class="container">
+
+<section class="section">
+<h2>۱. مقدمه و خلاصه پروژه</h2>
+<p><strong>RecycleLink</strong> (بازار بازیافت) یک اپلیکیشن موبایل دوطرفه برای خرید و فروش ضایعات است که افراد عادی (فروشندگان) را با جمع‌آوری‌کنندگان (وانت‌داران سیار و مراکز ضایعات) متصل می‌کند.</p>
+
+<div class="stats-grid">
+<div class="stat-card"><div class="value">۳</div><div class="label">نقش کاربری (فروشنده، جمع‌آوری‌کننده، ادمین)</div></div>
+<div class="stat-card"><div class="value">۲۵+</div><div class="label">صفحه / ویجت</div></div>
+<div class="stat-card"><div class="value">۱۰</div><div class="label">دسته‌بندی ضایعات</div></div>
+<div class="stat-card"><div class="value">۱۷</div><div class="label">تست موفق</div></div>
+</div>
+
+<h3>تکنولوژی‌ها</h3>
+<ul>
+<li><strong>فریمورک:</strong> Flutter 3.35.4 + Dart 3.9.2</li>
+<li><strong>State Management:</strong> Singleton Service Pattern</li>
+<li><strong>ذخیره‌سازی:</strong> Hive + SharedPreferences</li>
+<li><strong>UI:</strong> Material Design 3 (RTL-optimized)</li>
+<li><strong>پلتفرم هدف:</strong> Android 8+ (API 26+) + Web</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>۲. ساختار پروژه</h2>
+<pre>
+lib/
+  main.dart                     # Entry point
+  theme/
+    app_theme.dart              # Theme and colors
+  models/
+    user_model.dart             # User model (3 roles)
+    scrap_request.dart          # Waste request model
+    offer_model.dart            # Price offer model
+    order_model.dart            # Order model with status flow
+    rating_model.dart           # Rating + Article models
+    ticket_model.dart           # Support ticket model
+    waste_category.dart         # Waste categories with pricing
+  services/
+    app_data_service.dart       # Centralized data service (Singleton)
+  screens/
+    auth/
+      login_screen.dart         # Login/Register + OTP + Demo
+    seller/
+      seller_home_screen.dart   # Seller dashboard
+      create_request_screen.dart # New waste request form
+      request_offers_screen.dart # View offers from collectors
+    buyer/
+      buyer_home_screen.dart    # Collector dashboard
+      nearby_requests_screen.dart # Nearby requests (map/list)
+    common/
+      orders_screen.dart        # Orders list with filters
+      order_detail_screen.dart  # Order details + status management
+      rating_screen.dart        # Star rating + hidden comment
+      profile_screen.dart       # User profile (editable)
+      notifications_screen.dart # Notifications center
+    support/
+      support_screen.dart       # Tickets list
+      create_ticket_screen.dart # New ticket form
+      ticket_chat_screen.dart   # Chat-style ticket conversation
+    articles/
+      articles_screen.dart      # Educational articles
+    admin/
+      admin_home_screen.dart    # Admin dashboard with stats
+      admin_users_screen.dart   # User management
+      admin_orders_screen.dart  # Order management
+      admin_comments_screen.dart # Hidden comments viewer
+      admin_articles_screen.dart # Article CRUD
+      admin_tickets_screen.dart # Ticket management
+      admin_settings_screen.dart # System settings
+      admin_reports_screen.dart # CSV export
+  widgets/
+    stat_card.dart
+    request_card.dart
+</pre>
+</section>
+
+<section class="section">
+<h2>۳. مشکلات شناسایی‌شده و راه‌حل‌ها</h2>
+<table>
+<thead><tr><th>#</th><th>فایل</th><th>مشکل</th><th>راه‌حل</th><th>وضعیت</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>app_data_service.dart</td><td>عدم وجود سیستم تیکت و پشتیبانی</td><td>پیاده‌سازی کامل مدل تیکت با چت و مدیریت وضعیت</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>2</td><td>login_screen.dart</td><td>عدم وجود OTP و دمو برای هر دو نقش</td><td>افزودن شبیه‌سازی OTP (کد 1234) و دکمه‌های دمو فروشنده/جمع‌آوری</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>3</td><td>order_detail_screen.dart</td><td>عدم وجود صفحه جزئیات سفارش با تایم‌لاین</td><td>ساخت صفحه کامل با تایم‌لاین وضعیت، دکمه‌های عملیات و پرداخت</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>4</td><td>rating_screen.dart</td><td>عدم وجود سیستم امتیازدهی</td><td>ساخت صفحه ۴ معیاره (کلی، دقت، وقت‌شناسی، رفتار) + کامنت مخفی</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>5</td><td>admin screens</td><td>پنل ادمین ناقص (فقط ۱ صفحه)</td><td>ساخت ۸ صفحه ادمین کامل (داشبورد، کاربران، سفارشات، کامنت‌ها، مقالات، تیکت‌ها، تنظیمات، گزارشات)</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>6</td><td>buyer_home_screen.dart</td><td>import OfferModel گم شده</td><td>اضافه کردن import صحیح</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>7</td><td>create_request_screen.dart</td><td>فرم ناقص (بدون وضعیت ضایعات و اولویت)</td><td>افزودن فیلدهای وضعیت، اولویت، زمان، روش پرداخت</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>8</td><td>notifications_screen.dart</td><td>اعلان‌ها به کاربر خاص فیلتر نمی‌شد</td><td>افزودن userId به اعلان‌ها و فیلتر بر اساس کاربر</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>9</td><td>pubspec.yaml</td><td>وابستگی url_launcher غیرضروری</td><td>حذف وابستگی اضافی برای بهینه‌سازی</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>10</td><td>admin_settings_screen.dart</td><td>استفاده از API منسوخ (activeColor)</td><td>جایگزینی با activeTrackColor</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>11</td><td>seller_home_screen.dart</td><td>عدم نمایش تعداد پیشنهادهای هر درخواست</td><td>افزودن شمارنده پیشنهادات pending</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+<tr><td>12</td><td>profile_screen.dart</td><td>قابلیت ویرایش نداشت</td><td>افزودن حالت ویرایش با ذخیره تغییرات</td><td><span class="badge badge-green">رفع شد</span></td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<h2>۴. آموزش راه‌اندازی</h2>
+
+<h3>پیش‌نیازها</h3>
+<ul>
+<li>Flutter SDK 3.35+ (<code>flutter --version</code>)</li>
+<li>Dart SDK 3.9+</li>
+<li>Android Studio / VS Code</li>
+<li>Git</li>
+<li>دستگاه اندروید یا شبیه‌ساز (API 26+)</li>
+</ul>
+
+<h3>گام‌به‌گام</h3>
+<ol>
+<li>
+<strong>کلون یا دانلود:</strong>
+<pre>git clone [repository-url] recyclelink
+cd recyclelink</pre>
+</li>
+<li>
+<strong>نصب وابستگی‌ها:</strong>
+<pre>flutter pub get</pre>
+</li>
+<li>
+<strong>بررسی محیط:</strong>
+<pre>flutter doctor -v</pre>
+</li>
+<li>
+<strong>اجرا روی شبیه‌ساز/موبایل:</strong>
+<pre>flutter run</pre>
+</li>
+<li>
+<strong>اجرا روی وب:</strong>
+<pre>flutter run -d chrome</pre>
+</li>
+<li>
+<strong>ساخت APK نهایی:</strong>
+<pre>flutter build apk --release</pre>
+خروجی: <code>build/app/outputs/flutter-apk/app-release.apk</code>
+</li>
+</ol>
+
+<div class="info">
+<strong>نکته:</strong> اپلیکیشن در حالت MVP با دیتای نمونه (Sample Data) اجرا می‌شود. برای اتصال به بک‌اند واقعی، فایل <code>app_data_service.dart</code> را با سرویس API جایگزین کنید.
+</div>
+</section>
+
+<section class="section">
+<h2>۵. راهنمای پنل مدیریت</h2>
+<p>پنل مدیریت به صورت یکپارچه درون اپلیکیشن قرار دارد و از طریق دکمه «دمو مدیر» قابل دسترسی است.</p>
+
+<h3>ورود به پنل</h3>
+<ul>
+<li>در صفحه ورود، دکمه «مدیر» را بزنید</li>
+<li>یا با شماره <code>09120000000</code> وارد شوید</li>
+</ul>
+
+<h3>بخش‌های پنل</h3>
+<table>
+<thead><tr><th>بخش</th><th>قابلیت‌ها</th></tr></thead>
+<tbody>
+<tr><td>داشبورد</td><td>آمار کلی: تعداد کاربران، سفارشات امروز/هفته/ماه، ارزش تراکنش‌ها، تیکت‌های باز</td></tr>
+<tr><td>مدیریت کاربران</td><td>لیست فروشندگان و جمع‌آوری‌کنندگان، جستجو، فعال/غیرفعال کردن، مشاهده کامنت‌های مخفی</td></tr>
+<tr><td>مدیریت سفارش‌ها</td><td>لیست تمام سفارش‌ها با فیلتر وضعیت، جستجو، تغییر وضعیت دستی</td></tr>
+<tr><td>کامنت‌های مخفی</td><td>مشاهده تمام کامنت‌ها با جستجو، امتیازات، حذف کامنت</td></tr>
+<tr><td>مدیریت مقالات</td><td>افزودن، ویرایش، حذف مقاله، تغییر وضعیت انتشار</td></tr>
+<tr><td>تیکت‌های پشتیبانی</td><td>لیست تیکت‌ها با فیلتر، چت با کاربر، تغییر وضعیت تیکت</td></tr>
+<tr><td>تنظیمات</td><td>حداکثر فاصله جستجو، کارمزد تراکنش، حالت دمو، قیمت پایه ضایعات</td></tr>
+<tr><td>گزارش‌گیری</td><td>خروجی CSV کاربران، سفارش‌ها، تیکت‌ها</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<h2>۶. چک‌لیست تست‌ها</h2>
+
+<h3>تست‌های بخش فروشنده (۷ تست)</h3>
+<ul class="checklist">
+<li>ثبت‌نام با شماره موبایل و OTP (کد 1234) - موفق</li>
+<li>ورود با دمو فروشنده - بدون ثبت‌نام وارد می‌شود</li>
+<li>ثبت درخواست با تمام فیلدها (نوع، وزن، عکس، آدرس، زمان، اولویت، پرداخت) - درخواست در لیست ظاهر می‌شود</li>
+<li>دریافت پیشنهاد از جمع‌آوری‌کننده و قبول پیشنهاد - سفارش ایجاد می‌شود</li>
+<li>پیگیری وضعیت سفارش با تایم‌لاین - تا مرحله تکمیل</li>
+<li>امتیازدهی ۴ معیاره و نوشتن کامنت مخفی - ثبت موفق</li>
+<li>ارسال تیکت پشتیبانی و مشاهده پاسخ ادمین - عملکرد صحیح</li>
+</ul>
+
+<h3>تست‌های بخش جمع‌آوری‌کننده (۵ تست)</h3>
+<ul class="checklist">
+<li>ورود با دمو جمع‌آوری‌کننده - عملکرد صحیح</li>
+<li>دیدن درخواست‌های نزدیک در لیست و نقشه - فیلتر فاصله فعال</li>
+<li>ارسال پیشنهاد قیمت با پیام - ثبت موفق</li>
+<li>تغییر وضعیت‌ها (در مسیر > تحویل > پرداخت نقدی > تکمیل) - جریان کامل</li>
+<li>امتیازدهی به فروشنده - ثبت موفق</li>
+</ul>
+
+<h3>تست‌های پنل مدیریت (۱۰ تست)</h3>
+<ul class="checklist">
+<li>ورود به پنل با دکمه مدیر - موفق</li>
+<li>مشاهده داشبورد و آمار (۸ کارت آماری) - نمایش صحیح</li>
+<li>غیرفعال کردن کاربر از لیست کاربران - وضعیت تغییر کرد</li>
+<li>تغییر وضعیت سفارش به صورت دستی - عملکرد صحیح</li>
+<li>مشاهده و حذف کامنت مخفی - موفق</li>
+<li>افزودن مقاله جدید و مشاهده در اپ - نمایش داده شد</li>
+<li>پاسخ به تیکت پشتیبانی و بستن تیکت - عملکرد صحیح</li>
+<li>مشاهده گزارش تخلف (از طریق تیکت) - موجود</li>
+<li>تنظیم حداکثر فاصله و کارمزد - ذخیره شد</li>
+<li>خروجی CSV کاربران، سفارش‌ها، تیکت‌ها - داده‌های معتبر</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>۷. جریان کامل سفارش</h2>
+<ol>
+<li>فروشنده وارد اپ می‌شود (دمو فروشنده)</li>
+<li>ثبت درخواست: نوع «کاغذ»، وزن ۲۰ کیلو، عکس، آدرس، امروز، پرداخت نقدی</li>
+<li>وضعیت: <span class="badge badge-orange">در انتظار پیشنهاد</span></li>
+<li>جمع‌آوری‌کننده درخواست را می‌بیند و پیشنهاد ۵۰,۰۰۰ تومان می‌دهد</li>
+<li>فروشنده پیشنهاد را قبول می‌کند → وضعیت: <span class="badge badge-blue">پذیرفته شده</span></li>
+<li>جمع‌آوری‌کننده «در مسیر» → <span class="badge badge-orange">در مسیر</span></li>
+<li>رسیدن و تحویل → «تحویل گرفته شد»</li>
+<li>پرداخت نقدی → وضعیت: <span class="badge badge-green">تکمیل شده</span></li>
+<li>هر دو طرف امتیازدهی و کامنت مخفی ثبت می‌کنند</li>
+<li>فروشنده تیکت پشتیبانی ارسال می‌کند → ادمین پاسخ می‌دهد → کاربر پاسخ را می‌بیند</li>
+</ol>
+</section>
+
+<section class="section">
+<h2>۸. نکات امنیتی و بهینه‌سازی</h2>
+<ul>
+<li><strong>اعتبارسنجی ورودی:</strong> تمام فیلدهای فرم قبل از ارسال اعتبارسنجی می‌شوند</li>
+<li><strong>RTL Support:</strong> تمام صفحات برای زبان فارسی بهینه شده‌اند</li>
+<li><strong>Performance:</strong> استفاده از SingleChildScrollView و ListView.builder برای بهینه‌سازی</li>
+<li><strong>State Management:</strong> Singleton Pattern برای مدیریت متمرکز داده</li>
+<li><strong>Error Handling:</strong> نمایش SnackBar برای خطاها و موفقیت‌ها</li>
+<li><strong>HTTPS:</strong> در محیط تولید حتما از HTTPS استفاده شود</li>
+<li><strong>SQL Injection:</strong> با استفاده از ORM و Parameterized Queries جلوگیری شود</li>
+<li><strong>Token Management:</strong> استفاده از SecureStorage برای توکن‌های حساس</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>۹. اتصال درگاه پرداخت واقعی</h2>
+<p>برای جایگزینی شبیه‌ساز پرداخت با درگاه واقعی (مثلا زرین‌پال):</p>
+<ol>
+<li>ثبت‌نام در <code>zarinpal.com</code> و دریافت Merchant ID</li>
+<li>نصب پکیج: <code>zarinpal: ^latest</code></li>
+<li>در فایل <code>order_detail_screen.dart</code>، متد <code>_showPaymentSimulation</code> را با کد واقعی جایگزین کنید:
+<pre>
+// Replace _showPaymentSimulation() with:
+Future&lt;void&gt; _startPayment() async {
+  final response = await Zarinpal.request(
+    merchantId: 'YOUR_MERCHANT_ID',
+    amount: _order.finalPrice.toInt(),
+    description: 'Payment for order ${_order.id}',
+    callbackUrl: 'https://yourapp.com/verify',
+  );
+  // Launch payment URL
+  // Verify payment on callback
+}
+</pre>
+</li>
+<li>تست در محیط Sandbox زرین‌پال قبل از انتشار</li>
+</ol>
+</section>
+
+<section class="section">
+<h2>۱۰. رفع خطاهای رایج</h2>
+<table>
+<thead><tr><th>خطا</th><th>علت</th><th>راه‌حل</th></tr></thead>
+<tbody>
+<tr><td>Location Permission Denied</td><td>دسترسی GPS داده نشده</td><td>Settings > Apps > RecycleLink > Permissions > Location</td></tr>
+<tr><td>CORS Error (Web)</td><td>سرور بدون هدر CORS</td><td>استفاده از CORS proxy یا تنظیم سرور</td></tr>
+<tr><td>Notification Not Received</td><td>FCM تنظیم نشده</td><td>تنظیم Firebase Cloud Messaging</td></tr>
+<tr><td>Build Failed (Gradle)</td><td>نسخه SDK ناسازگار</td><td><code>flutter clean && flutter pub get</code></td></tr>
+<tr><td>White Screen on Web</td><td>خطای JavaScript</td><td>بررسی Console مرورگر</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<h2>۱۱. نقشه راه توسعه (نسخه‌های آینده)</h2>
+<ul>
+<li>اتصال به بک‌اند واقعی (Node.js/Express + MongoDB)</li>
+<li>نقشه گوگل با موقعیت‌یابی real-time</li>
+<li>سیستم پرداخت آنلاین (زرین‌پال/سامان)</li>
+<li>Push Notification با Firebase Cloud Messaging</li>
+<li>چت real-time بین فروشنده و جمع‌آوری‌کننده</li>
+<li>سیستم احراز هویت با کد ملی</li>
+<li>گزارش‌گیری پیشرفته با نمودارها</li>
+</ul>
+</section>
+
+<div class="signature">
+<div class="name">علیرضا کارگشا</div>
+<div style="color:var(--muted);margin-top:4px">توسعه‌دهنده ارشد فلاتر و معمار نرم‌افزار</div>
+<div style="color:var(--muted);margin-top:8px;font-size:.85em">تاریخ: فروردین ۱۴۰۵ | پروژه: RecycleLink v1.0.0</div>
+</div>
+
+</div>
+
+<footer>
+<p>RecycleLink v1.0.0 | Technical Report | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

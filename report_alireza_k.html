@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>گزارش بازطراحی RecycleLink</title>
+  <style>
+    body { font-family: Tahoma, Arial, sans-serif; background:#f5f1eb; color:#213126; margin:0; padding:0; line-height:1.9; }
+    .wrapper { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+    .hero { background: linear-gradient(135deg,#45624E,#A28263); color:#fff; border-radius:28px; padding:28px; box-shadow:0 18px 45px rgba(33,49,38,.14); }
+    .hero h1 { margin:0 0 8px; font-size:32px; }
+    .hero p { margin:8px 0; opacity:.95; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:24px; }
+    .card { background:#fff; border:1px solid #d9e1d7; border-radius:22px; padding:20px; box-shadow:0 10px 26px rgba(33,49,38,.06); }
+    h2 { margin:0 0 12px; color:#31483A; font-size:22px; }
+    h3 { margin:18px 0 10px; color:#45624E; font-size:18px; }
+    ul, ol { margin:0; padding-right:22px; }
+    li { margin-bottom:8px; }
+    .badge { display:inline-block; padding:6px 12px; border-radius:999px; background:#EAF1E6; color:#45624E; font-size:13px; margin-left:8px; }
+    .warning { background:#fff8ef; border-color:#ead9c6; }
+    .footer { margin-top:28px; font-size:13px; color:#6B756E; }
+    code { background:#eef3ec; padding:2px 6px; border-radius:8px; direction:ltr; unicode-bidi:bidi-override; display:inline-block; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <section class="hero">
+      <span class="badge">گزارش حرفه‌ای RTL</span>
+      <span class="badge">تهیه‌کننده: alireza.k</span>
+      <h1>گزارش بازطراحی و ریفکتور کامل اپلیکیشن RecycleLink</h1>
+      <p>این گزارش وضعیت بازطراحی UI/UX، بازسازی معماری Flutter، هم‌راستاسازی API و آماده‌سازی مسیر استقرار را جمع‌بندی می‌کند.</p>
+      <p>خروجی فعلی بر حذف داده‌های هاردکد، رفع برخورد با SafeArea، یکپارچه‌سازی تم، و تعریف مدل‌های داینامیک برای «نوع ضایعات» و «مقدار تقریبی» تمرکز دارد.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>خلاصه پیشرفت</h2>
+        <ul>
+          <li>ورود به معماری جدید با <strong>Provider</strong> به‌عنوان تنها لایه مدیریت وضعیت انجام شد.</li>
+          <li>هدرها، اکشن‌بارهای پایین، فرم‌ها و کارت‌ها به ویجت‌های reusable منتقل شدند.</li>
+          <li>رنگ‌های تند نارنجی با پالت سبز/قهوه‌ای ملایم جایگزین شدند.</li>
+          <li>صفحه تیکت به ساختار keyboard-aware با <code>MediaQuery.viewInsets</code> منتقل شد.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>کارهای باقی‌مانده</h2>
+        <ul>
+          <li>اجرای تحلیل و build نهایی Flutter در محیطی که Android SDK و Flutter SDK کامل داشته باشد.</li>
+          <li>اتصال سرویس بک‌اند نمونه به دیتابیس واقعی مانند PostgreSQL یا MySQL.</li>
+          <li>اضافه‌کردن placeholder assetهای نهایی داخل <code>assets/images</code>.</li>
+          <li>تبدیل placeholder screenهای سفارش و مقالات به ماژول‌های production-ready کامل.</li>
+        </ul>
+      </article>
+      <article class="card warning">
+        <h2>ریسک‌ها و نکات</h2>
+        <ul>
+          <li>APK در این محیط ساخته نشد چون Flutter/Java/Android SDK حاضر نبود.</li>
+          <li>برای build قطعی باید یک runner لینوکسی/ویندوزی با toolchain کامل در اختیار باشد.</li>
+          <li>بخش backend فعلاً lightweight و in-memory است و برای دمو سریع مناسب است.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2>پیشنهادهای بهبود</h2>
+      <ul>
+        <li>افزودن repository جداگانه برای auth، requests، tickets و admin settings.</li>
+        <li>پیاده‌سازی persistence سمت موبایل با Hive فقط برای cache و نه منطق اصلی دامنه.</li>
+        <li>افزودن golden test برای کارت‌ها و snapshot test برای صفحات کلیدی.</li>
+        <li>افزودن analytics برای مسیرهای ثبت درخواست، پذیرش سفارش و تیکت پشتیبانی.</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2>پروتکل تست سه‌مرحله‌ای</h2>
+      <h3>مرحله ۱: پیش‌بینی باگ</h3>
+      <ul>
+        <li>برخورد دکمه‌ها با نوار ناوبری در دستگاه‌های اندرویدی سه‌دکمه‌ای</li>
+        <li>sync نشدن قیمت‌های ویرایشی پنل مدیریت در فرم ثبت درخواست</li>
+        <li>کرش ناشی از نبودن داده category یا quantity هنگام bootstrap ناقص</li>
+      </ul>
+      <h3>مرحله ۲: شبیه‌سازی جریان کاربر</h3>
+      <ul>
+        <li>ورود ادمین ← ویرایش قیمت ← ذخیره ← مشاهده تغییر قیمت در فرم seller</li>
+        <li>ورود فروشنده ← ثبت درخواست فوری ← بازگشت به داشبورد ← بررسی کارت جدید</li>
+        <li>ورود جمع‌آور ← بازکردن تیکت ← بازشدن کیبورد ← ارسال پیام بدون پوشانده‌شدن input</li>
+      </ul>
+      <h3>مرحله ۳: لوپ سه‌باره رفع باگ</h3>
+      <ol>
+        <li>Iteration A: اصلاح ساختار layout و padding پایه</li>
+        <li>Iteration B: رگرسیون‌گیری روی موبایل کوچک، متوسط و تبلت</li>
+        <li>Iteration C: تمیزکاری نهایی، حذف شرط‌های شکننده و ثبت fallbackها</li>
+      </ol>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2>آموزش گام‌به‌گام اجرا</h2>
+      <ol>
+        <li>فایل <code>.env.example</code> را کپی کرده و مقدار <code>API_BASE_URL</code> را تنظیم کنید.</li>
+        <li>برای بک‌اند سریع یکی از این دو را اجرا کنید: <code>node backend/node/server.js</code> یا <code>python3 backend/python/server.py</code>.</li>
+        <li>در محیط دارای Flutter SDK، وابستگی‌ها را نصب کنید: <code>flutter pub get</code>.</li>
+        <li>اپ را با متغیر محیطی API اجرا کنید: <code>flutter run --dart-define=API_BASE_URL=http://127.0.0.1:8080</code>.</li>
+        <li>برای بسته‌بندی سورس، اسکریپت <code>scripts/package_release.sh 2.0.0</code> یا <code>python3 scripts/package_release.py 2.0.0</code> را اجرا کنید.</li>
+      </ol>
+    </section>
+
+    <p class="footer">نسخه گزارش: 2.0.0 · نویسنده: alireza.k · حوزه پروژه: اپلیکیشن مدیریت ضایعات و تیکتینگ با تمرکز بر بازطراحی تجربه کاربری، معماری ماژولار و آمادگی استقرار.</p>
+  </div>
+</body>
+</html>
